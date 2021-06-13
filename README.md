@@ -1,8 +1,9 @@
 ![intellimed](https://user-images.githubusercontent.com/53670363/121812988-b0e9aa00-cc9c-11eb-9565-88d4ac0a857b.png)
 
 <h1>How to run</h1>
-1. pip install -r requirements.txt<br>
-2. python3 main.py<br>
+1. Clone repo
+2. pip install -r requirements.txt<br>
+3. python3 main.py<br>
 <br>
 
 Note: Don't forget to add your own OAuth2 keys for GitHub, Google in .env in place of <GITHUB_CLIENT_ID>, <GITHUB_CLIENT_SECRET> and <GOOGLE_CLIENT_ID>, <GOOGLE_CLIENT_SECRET> respectively.
