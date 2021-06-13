@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Summary | IntelliMed</title>
+</head>
+<body>
+    {{ summary }}
+    <br><br>
+    <h1>{{ condition }}</h1>
+    <br><br>
+    {{ confidence }}
+    <br><br>
+    Keywords:<br>
+    <table>
+    {% for key,value in keywords.items() %}
+        <tr><td>{{ key }}:{{ value }}</td></tr>
+    {% endfor %}</table>
+</body>
+</html>

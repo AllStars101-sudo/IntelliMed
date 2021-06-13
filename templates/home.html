@@ -1,0 +1,73 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="container">
+      <div class="navbar">
+        <div class="menu">
+          <h3 class="logo">Intelli<span>Med</span></h3>
+          <div class="hamburger-menu">
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="main-container">
+        <div class="main">
+          <header>
+            <video playsinline autoplay muted loop poster="" id="bgvid">
+              <source src="{{ url_for('static', filename='intellimed.mp4') }}" type="video/mp4">
+            </video>
+            <div class="overlay">
+              <div class="inner">
+                {% if current_user.is_authenticated %}
+                <h2 class="title" style="font-size:3rem">Hey there, {{current_user.username}}!</h2>
+                <p>
+                  Welcome back to IntelliMed
+                </p>
+                <br>
+                
+                <div class="button">
+                <a href="{{url_for('upload_file')}}">Continue ></a>
+
+              </div>
+              <div class="button">
+                <a href="{{url_for('logout')}}">Logout</a>
+
+              </div>
+              {% else %}
+              <h2 class="title">IntelliMed</h2>
+              <p>
+                Your health. Simplified.
+              </p>
+              <br>
+              <div class="button">
+                <a href="{{url_for('login')}}">Get Started</a>
+              </div>
+              {% endif %}
+              </div>
+            </div>
+          </header>
+          <canvas class="background2"></canvas>
+
+
+        </div>
+        <div class="shadow one"></div>
+        <div class="shadow two"></div>
+      </div>
+
+      <div class="links">
+        <ul>
+          <li>
+            <a href="/" style="--i: 0.3s;">Home</a>
+          </li>
+          <li>
+            <a href="/getstarted" style="--i: 0.05s;">Get started</a>
+          </li>
+          <li>
+            <a href="/about" style="--i: 0.15s;">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
+
+{% endblock content %}

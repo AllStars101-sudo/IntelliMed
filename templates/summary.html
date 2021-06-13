@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Summary | IntelliMed</title>
+  <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css'><link rel="stylesheet" href="{{ url_for('static', filename='sumstyle.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" href="{{ url_for('static', filename='dstyle.css') }}">
+<link rel="icon" 
+      type="image/png" 
+      href="{{ url_for('static', filename='intellimedicon.png') }}" />
+
+<style>
+
+main {
+  margin: 100px auto;
+  position: relative;
+  padding: 10px 5px;
+  background: hsla(0,0%,100%,.3);
+  font-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  border-radius: 10px;
+  width: 60%;
+  overflow: hidden;
+}
+
+main::before {
+  content: '';
+  margin: -35px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  filter: blur(20px);
+  z-index: -1;
+}
+
+
+footer {
+  padding-top: 20px;
+  font-weight: bold;
+}
+
+cite {
+  font-style: normal;
+  font-size: 22px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lora);
+</style>
+
+
+</head>
+<body id="cloudsbg">  
+
+
+<main>
+      <font size=10><b><center><span class="card-grad--shot">Summary</span></center></b></font>
+      <center><span class="card-grad--shot">Powered by IntelliMed and Google Cloud</span></center>
+<p>{{ summary }}</p>
+</main>
+
+<!-- partial:index.partial.html -->
+<div class="blog-slider">
+  <div class="blog-slider__wrp swiper-wrapper">
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        
+        <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1535759872/kuldar-kalvik-799168-unsplash.jpg" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <span class="blog-slider__code">AI</span>
+        <div class="blog-slider__title">How severe is your condition?</div>
+        <div class="blog-slider__text">{{ condition }}</div>
+      </div>
+    </div>
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1535759871/jason-leung-798979-unsplash.jpg" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <span class="blog-slider__code">AI</span>
+        <div class="blog-slider__title">How confident is your doctor?</div>
+        <div class="blog-slider__text">{{ confidence }}</div>
+        <a href="#" class="blog-slider__button">Learn how we know</a>
+      </div>
+    </div>
+    
+  </div>
+  <div class="blog-slider__pagination"></div>
+</div>
+
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js'></script><script  src="{{ url_for('static', filename='summary.js') }}"></script>
+
+<div class="cards">
+  {% for key,value in keywords.items() %}
+  <div class="card">
+    <div class="card-info">
+      <span class="card-grad--video">Keywords</span>
+    </div>
+
+    <div class="card-heading">
+      <a href="https://abubakersaeed.netlify.app/designs/d1-button-fluent-design" target="_blank">{{ key }}</a>
+    </div>
+
+    <div class="card-tags">
+      <div class="card-tag">{{ value }}</div>
+    </div>
+    
+  </div>
+
+
+  {% endfor %}
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
+<script>
+VANTA.CLOUDS({
+  el: "#cloudsbg",
+  mouseControls: false,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  skyColor: 0xd8924d,
+  cloudShadowColor: 0x504518,
+  speed: 0.50
+})
+</script>
+
+</body>
+</html>

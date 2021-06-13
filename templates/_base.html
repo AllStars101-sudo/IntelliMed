@@ -1,0 +1,18 @@
+<!-- templates/_base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | IntelliMed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+    <link rel="icon" 
+      type="image/png" 
+      href="{{ url_for('static', filename='intellimedicon.png') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+  </body>
+</html>
