@@ -1,3 +1,5 @@
+![intellimed](https://user-images.githubusercontent.com/53670363/121812988-b0e9aa00-cc9c-11eb-9565-88d4ac0a857b.png)
+
 <h1>How to run</h1>
 1. pip install -r requirements.txt<br>
 2. python3 main.py<br>
