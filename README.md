@@ -1,7 +1,9 @@
 <h1>How to run</h1>
-```python
-pip install -r requirements.txt
-```
+1. pip install -r requirements.txt<br>
+2. python3 main.py<br>
+<br>
+
+Note: Don't forget to add your own OAuth2 keys for GitHub, Google in .env in place of <GITHUB_CLIENT_ID>, <GITHUB_CLIENT_SECRET> and <GOOGLE_CLIENT_ID>, <GOOGLE_CLIENT_SECRET> respectively.
 
 <h1>Inspiration</h1>
 IntelliMed was a product of necessity, particularly because there's nothing quite like it. No product or service has come close to what IntelliMed has achieved- deducing complex medical reports to simple ones, readable by everyone. We noticed that medical reports are often complex and hard to comprehend and to our surprise, there wasn't a single solution that could make this easier.
