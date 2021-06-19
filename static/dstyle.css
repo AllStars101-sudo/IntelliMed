@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap");
 
 /* DEFAULTS */
 /* ================================================================================= */
@@ -13,7 +13,8 @@ body {
   place-content: center;
 
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   margin: 0;
 }
 
@@ -35,10 +36,14 @@ body {
   border-radius: 40px;
   padding: 30px;
 
-  box-shadow: -4px 4px 26px 2px hsla(184, 50%, 20%, .1);
-  background: linear-gradient(to right bottom, hsl(0, 0%, 98%), hsl(0, 0%, 96%));
+  box-shadow: -4px 4px 26px 2px hsla(184, 50%, 20%, 0.1);
+  background: linear-gradient(
+    to right bottom,
+    hsl(0, 0%, 98%),
+    hsl(0, 0%, 96%)
+  );
 
-  transition: all .3s;
+  transition: all 0.3s;
   position: relative;
 }
 
@@ -48,11 +53,11 @@ body {
 
 .card:hover,
 .card:focus-within {
-  transform: translateY(-20px)
+  transform: translateY(-20px);
 }
 
-.card:hover+.card,
-.card:focus-within+.card {
+.card:hover + .card,
+.card:focus-within + .card {
   transform: translateX(80px);
 }
 
@@ -60,7 +65,7 @@ body {
   margin-bottom: 14px;
 }
 
-.card-info>span:first-child {
+.card-info > span:first-child {
   margin-right: 6px;
 }
 
@@ -68,17 +73,17 @@ body {
   color: transparent;
   background: linear-gradient(to right, hsl(91, 96%, 50%), hsl(159, 96%, 50%));
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
 }
 
 .card-grad--shot {
   color: transparent;
   background: linear-gradient(to right, hsl(294, 96%, 50%), hsl(201, 96%, 50%));
   -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
 }
 
-.card-info>span:last-child {
+.card-info > span:last-child {
   color: hsl(0, 0%, 70%);
 }
 
@@ -107,5 +112,5 @@ body {
   border-radius: 100px;
   text-transform: uppercase;
   margin-right: 10px;
-  font-size: .9em;
+  font-size: 0.9em;
 }
