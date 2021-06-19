@@ -10,7 +10,7 @@ body {
   font-family: "Poppins", sans-serif;
 }
 a {
-  color:#fff;
+  color: #fff;
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -27,13 +27,13 @@ a {
   text-align: center;
 }
 .transition {
-  position:absolute;
-  height:100%;
-  width:30%;
-  background:#d6d6d6;
+  position: absolute;
+  height: 100%;
+  width: 30%;
+  background: #d6d6d6;
   transform: skewX(-5deg) translateX(-50px);
-  transition:2s all ease-in-out;
-  -webkit-transition:2s all ease-in-out;
+  transition: 2s all ease-in-out;
+  -webkit-transition: 2s all ease-in-out;
 }
 
 .container {
@@ -65,18 +65,18 @@ a {
   color: #fff;
 }
 .background {
-  position:absolute;
-  display:block;
+  position: absolute;
+  display: block;
   top: 0;
   left: 0;
   z-index: 0;
 }
 .background2 {
-    position:absolute;
-    display:block;
-    top: 0;
-    left: 0;
-    z-index: 0;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 .logo {
@@ -86,7 +86,6 @@ a {
   letter-spacing: 2px;
   line-height: 4rem;
 }
-
 
 .logo span {
   font-weight: 300;
@@ -151,7 +150,8 @@ video {
 header {
   min-height: 100vh;
   width: 100%;
-  background: url("static/Routines/images/routinedeck.jpg") no-repeat top center / cover;
+  background: url("static/Routines/images/routinedeck.jpg") no-repeat top center /
+    cover;
   position: relative;
 }
 
