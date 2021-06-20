@@ -482,8 +482,6 @@ def download_file(name):
 
     return render_template('summary.html',summary=str(summary),condition=sample_analyze_sentiment(summary),confidence = sample_classify_text(summary),keywords=result)
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/home/chris/cloudcreds.json" #for jupyter
-
 #sentiment analysis (how severe the condition is)
 def sample_analyze_sentiment(text_content):
     """
