@@ -1,1 +1,4 @@
 /env
+app/__pycache__/__init__.cpython-39.pyc
+app/__pycache__/models.cpython-39.pyc
+app/__pycache__/oauth.cpython-39.pyc
