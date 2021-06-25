@@ -4,3 +4,4 @@ app/__pycache__/models.cpython-39.pyc
 app/__pycache__/oauth.cpython-39.pyc
 uploads/Physics_PB3.pdf
 uploads/
+.env

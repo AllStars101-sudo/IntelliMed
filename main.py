@@ -25,6 +25,7 @@ import math
 from keybert import KeyBERT
 from PyDictionary import PyDictionary
 from nltk.corpus import wordnet
+from docx import Document
 
 
 config = {
@@ -35,7 +36,7 @@ config = {
 
 
 UPLOAD_FOLDER = './uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','docx'}
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///./users.db"
@@ -440,6 +441,7 @@ VANTA.NET({
 @cache.cached(timeout=3600)
 @login_required
 def download_file(name):
+  if name.split('.')[1]=="pdf":
     output_string = StringIO()
     with open('./uploads/'+name, 'rb') as in_file:
         parser = PDFParser(in_file)
@@ -457,30 +459,41 @@ def download_file(name):
     res = re.sub(' +', ' ', full)
     spacekiller = str(res)
     summary = spacekiller.replace('\n', ' ').replace('\r', '')
-
     doc=summary
 
-    kw_model = KeyBERT('distilbert-base-nli-mean-tokens')
-    processedkeywords = kw_model.extract_keywords(doc)
+  elif name.split('.')[1]=="docx":
+    document = Document('./uploads/'+name)
+    for para in document.paragraphs:
+        body= para.text
 
-    keywords=[]
-    for keyword in processedkeywords:
-        keywords.append(keyword[0])
+    model = Summarizer()
+    result = model(body, min_length=60)
+    summary = ''.join(result)
+    doc=summary
 
-    meaning=[]
 
-    for i in keywords:
-        syns = wordnet.synsets(i)
-        meaning.append(syns[0].definition())
-    
-    result = {}
-    for key in keywords:
-        for value in meaning:
-            result[key] = value
-            meaning.remove(value)
-            break
 
-    return render_template('summary.html',summary=str(summary),condition=sample_analyze_sentiment(summary),confidence = sample_classify_text(summary),keywords=result)
+  kw_model = KeyBERT('distilbert-base-nli-mean-tokens')
+  processedkeywords = kw_model.extract_keywords(doc)
+
+  keywords=[]
+  for keyword in processedkeywords:
+      keywords.append(keyword[0])
+
+  meaning=[]
+
+  for i in keywords:
+      syns = wordnet.synsets(i)
+      meaning.append(syns[0].definition())
+  
+  result = {}
+  for key in keywords:
+      for value in meaning:
+          result[key] = value
+          meaning.remove(value)
+          break
+
+  return render_template('summary.html',summary=str(summary),condition=sample_analyze_sentiment(summary),confidence = sample_classify_text(summary),keywords=result)
 
 #sentiment analysis (how severe the condition is)
 def sample_analyze_sentiment(text_content):
@@ -583,6 +596,7 @@ def keywordsfunc(text_content):
             break    
 
     return result
+
 
 
 
