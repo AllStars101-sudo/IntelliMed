@@ -439,6 +439,7 @@ VANTA.NET({
 </html>
     '''
 
+
 @app.route('/uploads/<name>')
 @cache.cached(timeout=3600)
 @login_required
@@ -561,6 +562,7 @@ def download_file(name):
 
   return render_template('summary.html',summary=str(summary),condition=sample_analyze_sentiment(summary),confidence = sample_classify_text(summary),keywords=result)
 
+
 #sentiment analysis (how severe the condition is)
 def sample_analyze_sentiment(text_content):
     """
@@ -612,6 +614,7 @@ def sample_analyze_sentiment(text_content):
     else:
         return "Your condition is extremely serious! Take good care of yourself and visit the doctor immediately."
 
+
 def sample_classify_text(text_content):
     """
     Classifying Content in a String
@@ -639,7 +642,10 @@ def sample_classify_text(text_content):
         # Get the name of the category representing the document.
         # See the predefined taxonomy of categories:
         # https://cloud.google.com/natural-language/docs/categories
-        confidence = "Your doctor is "+str(math.ceil(category.confidence*100))+" per-cent confident with his diagnosis."
+        if math.ceil(category.confidence*100)<=50:
+          confidence = "We've determined that the document is not a health document. None of the parameters here will be accurate. However, if it was a medical report, we're extremely sorry. You may raise an issue here at our GitHub Page: https://github.com/AllStars101-sudo/IntelliMed"
+        else:
+          confidence = "Your doctor is "+str(math.ceil(category.confidence*100))+" per-cent confident with his diagnosis."
         return confidence
 
 
