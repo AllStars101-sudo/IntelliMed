@@ -71,7 +71,53 @@
         font-style: normal;
         font-size: 22px;
       }
+      
+      button {
+        font-family: "Montserrat", sans-serif;
+      }
 
+
+      button {
+        background: #9AD3DE;
+        border: 0;
+        border-radius: 4px;
+        padding: 18px 30px;
+        font-size: 18px;
+        color: #FFFFFF;
+        cursor: pointer;
+      }
+      button:focus {
+        outline: none;
+      }
+      button:hover {
+        background: #c0e4eb;
+      }
+
+      .popup {
+        background: rgba(100, 100, 100, 0.5);
+        position: fixed;
+        display: none;
+        z-index: 5000;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+      }
+      .popup > div {
+        max-width: 600px;
+        width: 70%;
+        position: fixed;
+        transform: translate(-50%, -50%);
+        left: 50%;
+        top: 50%;
+        background: #FFFFFF;
+        padding: 30px;
+        z-index: 5001;
+        text-align: center;
+        border: 5px solid #9AD3DE;
+        border-radius: 10px;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.4);
+      }
       @import url(https://fonts.googleapis.com/css?family=Lora);
     </style>
   </head>
@@ -128,6 +174,14 @@
             <div class="blog-slider__title">How confident is your doctor?</div>
             <div class="blog-slider__text">{{ confidence }}</div>
             <a hidden href="#" class="blog-slider__button">Learn how we know</a>
+            <button data-js="open">Learn how we know</button>
+            <div class="popup">
+              <h2 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">How we determine the confidence of your doctor</h2>
+              <p style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">We use Google's industry-leading AI engine to determine the confidence of your doctor using just the tone and language of his text. The more objective he appears, the more confident he appears to be.</p>
+
+              <p style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Do note that this metric is not failproof, and you shouldn't judge your doctor based on this. We're constantly working to improve this feature but we highly recommend not using it for practical purposes or to test your doctor. Take their advice regardless of what you see here.</p>
+              <button name="close">Close</button>
+            </div>
           </div>
         </div>
       </div>
@@ -194,5 +248,7 @@
         }
       }
     </script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script><script src="{{ url_for('static', filename='button.js') }}"></script>
   </body>
 </html>
