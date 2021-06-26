@@ -26,6 +26,8 @@ from keybert import KeyBERT
 from PyDictionary import PyDictionary
 from nltk.corpus import wordnet
 from docx import Document
+from google.cloud import vision
+import io
 
 
 config = {
@@ -471,7 +473,46 @@ def download_file(name):
     summary = ''.join(result)
     doc=summary
 
+  elif name.split('.')[1]=="txt":
+    body=open("./uploads/"+name,'r')
 
+    model = Summarizer()
+    result = model(body, min_length=60)
+    summary = ''.join(result)
+    doc=summary
+
+  elif name.split('.')[1]=="jpg" or name.split('.')[1]=="png" or name.split('.')[1]=="jpeg":
+    """Detects text in the file."""
+
+    client = vision.ImageAnnotatorClient()
+
+    with io.open("./uploads/"+name, 'rb') as image_file:
+        content = image_file.read()
+
+    image = vision.Image(content=content)
+
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+
+    textdes=""
+    for text in texts:
+        textdes+=text.description
+
+    a_string = textdes
+    split_string = a_string.split("Close", 1)
+
+    body = split_string[0]
+
+    if response.error.message:
+        raise Exception(
+            '{}\nFor more info on error messages, check: '
+            'https://cloud.google.com/apis/design/errors'.format(
+                response.error.message))
+
+    model = Summarizer()
+    result = model(body, min_length=60)
+    summary = ''.join(result)
+    doc=summary
 
   kw_model = KeyBERT('distilbert-base-nli-mean-tokens')
   processedkeywords = kw_model.extract_keywords(doc)
@@ -525,7 +566,10 @@ def sample_analyze_sentiment(text_content):
 
 
     listok = list(str(response.document_sentiment.score))
-    responsestring = listok[0]+listok[1]+listok[2]+listok[3]
+    if len(listok)==3:
+      responsestring = listok[0]+listok[1]+listok[2]
+    elif len(listok)==4:
+      responsestring = listok[0]+listok[1]+listok[2]+listok[3]
     responsefloat = float(responsestring)
         
     # Get sentiment for all sentences in the document
