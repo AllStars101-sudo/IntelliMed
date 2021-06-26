@@ -28,7 +28,7 @@ from nltk.corpus import wordnet
 from docx import Document
 from google.cloud import vision
 import io
-
+from google.cloud import speech
 
 config = {
     "DEBUG": True,          # some Flask specific configs
@@ -38,7 +38,7 @@ config = {
 
 
 UPLOAD_FOLDER = './uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','docx'}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','docx','flac','wav','mp3'}
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///./users.db"
@@ -514,6 +514,31 @@ def download_file(name):
     summary = ''.join(result)
     doc=summary
 
+  elif name.split('.')[1]=="wav" or name.split('.')[1]=="mp3" or name.split('.')[1]=="flac":
+
+    client = speech.SpeechClient()
+
+    with io.open("./uploads/"+name, "rb") as audio_file:
+        content = audio_file.read()
+
+    audio = speech.RecognitionAudio(content=content)
+    config = speech.RecognitionConfig(
+        encoding=speech.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED,
+        sample_rate_hertz=16000,
+        language_code="en-US",
+    )
+
+    response = client.recognize(config=config, audio=audio)
+    body=""
+    # Each result is for a consecutive portion of the audio. Iterate through
+    # them to get the transcripts for the entire audio file.
+    for result in response.results:
+        # The first alternative is the most likely one for this portion.
+        summary=str(result.alternatives[0].transcript)
+    
+
+    doc= summary
+
   kw_model = KeyBERT('distilbert-base-nli-mean-tokens')
   processedkeywords = kw_model.extract_keywords(doc)
 
@@ -569,6 +594,8 @@ def sample_analyze_sentiment(text_content):
     if len(listok)==3:
       responsestring = listok[0]+listok[1]+listok[2]
     elif len(listok)==4:
+      responsestring = listok[0]+listok[1]+listok[2]+listok[3]
+    else:
       responsestring = listok[0]+listok[1]+listok[2]+listok[3]
     responsefloat = float(responsestring)
         
