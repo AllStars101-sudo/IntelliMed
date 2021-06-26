@@ -29,7 +29,9 @@
       type="image/png"
       href="{{ url_for('static', filename='intellimedicon.png') }}"
     />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     <style>
       main {
         margin: 100px auto;
@@ -83,6 +85,8 @@
         >
       </center>
       <p>{{ summary }}</p>
+      <img src="{{ url_for('static', filename='play.png') }}" onclick="speak('resume')" alt="Play or resume Text-to-Speech of Summary">
+      <img src="{{ url_for('static', filename='pause.png') }}" onclick="speak('pause')" alt="Pause Text-to-Speech of Summary">
     </main>
 
     <!-- partial:index.partial.html -->
@@ -160,6 +164,24 @@
         cloudShadowColor: 0x504518,
         speed: 0.5,
       });
+    </script>
+    <script>
+      var input = '{{ summary }}';
+
+      input.addEventListener('change', speak);
+      input.addEventListener('webkitspeechchange', speak);
+
+      function speak(type) {
+        if (type == 'pause') {
+          var speech = new SpeechSynthesisUtterance(input);
+          speechSynthesis.speak(speech);
+          speechSynthesis.pause(speech);
+        }
+        if (type == 'resume') {
+          var speech = new SpeechSynthesisUtterance(input);
+          speechSynthesis.resume(speech);
+        }
+      }
     </script>
   </body>
 </html>
