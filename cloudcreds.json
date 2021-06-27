@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "intellimed-317921",
+  "private_key_id": "28866823e2ead53a035dd519f3198f9a54e6cf30",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDIwVPF4tUmAuiI\nhAff7PKL9LCoSzL78+WOwONq7anuB7/0QvrGgzaVjaKWnhrtV+nvkDjfCf7diz0d\nMlNMpHlUVhwDS7WO8cxVKkjL4Zdf8x9glXgK8mfngq9FrGmUesbfg7G+LhLyM/nl\nNf4e1NanZjXaO7kat3p61vk0WxzEg53jKYEIlRT6SfJQYHqsGutln2f148+HMiiE\nRJDIacKCRDmNji2S/lDu7ioRmWdQsueoQShXpadNuuoaY1Qjux2fxW0CjDMAW1vY\nNGkdhPEsnDpTv6rjpx6xmWIKc+8jjnIFP1j3lw+DKNstkUsRbdl0ew+ZGoYy17Rv\nJNrxKH7xAgMBAAECggEAC7v2dZPzTtbPWLYURRZzJuhqhau/kyfdEcxcfpzdreLD\naYzws4xqiFtQVurEOtNErT1fgEnz8mcib1kdsqvPxl+Hdk8v5ucN69HI54HheI5G\nwJJ8Ax0gIvwUhUdf9HnTXgUzQnaBolPqFhJjLtIp/ybjnESZZo0K77CDvc0FkBw2\n0axruPKjvH1kPXXVPNfZCEI/80IJlOOGSaSBP87bQDE3gC+1dByNLcRjdBQybYbv\nuYSx/OntSAULdKlQyHBpAUohHnM9L9YU8HGs0HO23Q1HX4ro9StmZz6MBg5s/KeX\nLpUUEwomnnZ43Fmt12u7YnWdlz+yxjVndm/Qpzb/sQKBgQDsBAnPiB43zN1E9VsM\ndE2gVCn3jKgRsYwHfyr2NrkLVeS1oTcBrHMNlEHXGMBNcVUzIfKosVHyxQMGmw1p\nLpwM2+YDr6aiNqX2FC/d9KJ8A5GVMZKjzVdp5up6gcmfWcKbS97qug8Bs5ZheEIy\nO3/IoeLWiuDOxjiHe0yQaVcIzwKBgQDZwPfFGkfcE8af+jQH1c1vaoXo3rhBP26r\n23q2tJzRnLQvn/DboOhhlY5kZ87GiGWkGU12XUQkrUY5ozGOK6nLmETUqDxg6TYx\nM/AN6doJ032m3FfDzqWLF4SKBZsMqgk+TDSAlpPLTBGVxBvkoq2iGKdeEM/9x39X\npQjqGBpsPwKBgQC12Hqyox8dQURvQFgxpV62HILlUEOitli84fd5EzrKCBka9KcM\nLBHNsaB1GYX5ZUwPBKYR4eXRFoi5SzgvBZGIutljl6/dJhwDGRS0gCu9P4apHDPu\n72TdnOSnFV8C30b5HqEX29l6JyPD38OpLnzLWigLw59o0gN2J8MbNX6wswKBgQCp\nacRbCPNXedtSo6rPXbwTLuE4J+9adCt6caurciF/w1c8pkcR2MJzCZRa8ZiiRYQu\ng7EMoctebaDxPtJTNg1IZRNIEAvJqieLaEkfygzlEDH2G//8S03oRUfMykezNqcy\nXL+MO5qI1Inp50V8QESulFfCi3oGi6u7WJ7y4gXMqQKBgD2g8GRfS60bRcn2nu6x\njZ2sj7oXEQDDIo2izkcBrbLwMxpSZEAdTpRAePHkAwycXZl1769uC/vohGCCODP4\nWWZ9+lyruZIsds9cVMa/qt4CQiikaJ+43RVxOfmnGp5+gpLsz4nMg9zXiQmVte6V\nRYVUXnLiCqvDnt2EMPo9eHO3\n-----END PRIVATE KEY-----\n",
+  "client_email": "intellimed-service@intellimed-317921.iam.gserviceaccount.com",
+  "client_id": "100924351562893886842",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/intellimed-service%40intellimed-317921.iam.gserviceaccount.com"
+}

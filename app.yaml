@@ -1,17 +1,25 @@
 runtime: python
 env: flex
-entrypoint: gunicorn -b :$PORT main:app
 
 runtime_config:
-  python_version: 3
-
+    python_version: 3
 # This sample incurs costs to run on the App Engine flexible environment.
 # The settings below are to reduce costs during testing and are not appropriate
 # for production use. For more information, see:
 # https://cloud.google.com/appengine/docs/flexible/python/configuring-your-app-with-app-yaml
-manual_scaling:
-  instances: 1
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 2
 resources:
-  cpu: 1
-  memory_gb: 0.5
-  disk_size_gb: 10
+  cpu: 8
+  memory_gb: 16
+  disk_size_gb: 20
+
+env_variables:
+  GITHUB_ID: 58d145aee89b93c828f4
+  GITHUB_SECRET: 55763aa7536fb51584ebc27c86e8f30814706b27
+  GOOGLE_OAUTH_CLIENT_ID: kdhakljdhlksahdklha
+  GOOGLE_OAUTH_CLIENT_SECRET: ahdaisldaskaksdkasdha
+  OAUTHLIB_RELAX_TOKEN_SCOPE: true
+  OAUTHLIB_INSECURE_TRANSPORT: true
+  GOOGLE_APPLICATION_CREDENTIALS: "cloudcreds.json"
