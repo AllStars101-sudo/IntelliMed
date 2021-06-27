@@ -71,19 +71,18 @@
         font-style: normal;
         font-size: 22px;
       }
-      
+
       button {
         font-family: "Montserrat", sans-serif;
       }
 
-
       button {
-        background: #9AD3DE;
+        background: #9ad3de;
         border: 0;
         border-radius: 4px;
         padding: 18px 30px;
         font-size: 18px;
-        color: #FFFFFF;
+        color: #ffffff;
         cursor: pointer;
       }
       button:focus {
@@ -110,11 +109,11 @@
         transform: translate(-50%, -50%);
         left: 50%;
         top: 50%;
-        background: #FFFFFF;
+        background: #ffffff;
         padding: 30px;
         z-index: 5001;
         text-align: center;
-        border: 5px solid #9AD3DE;
+        border: 5px solid #9ad3de;
         border-radius: 10px;
         box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.4);
       }
@@ -176,10 +175,41 @@
             <a hidden href="#" class="blog-slider__button">Learn how we know</a>
             <button data-js="open">Learn how we know</button>
             <div class="popup">
-              <h2 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">How we determine the confidence of your doctor</h2>
-              <p style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">We use Google's industry-leading AI engine to determine the confidence of your doctor using just the tone and language of his text. The more objective he appears, the more confident he appears to be.</p>
+              <h2
+                style="
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                    'Helvetica Neue', sans-serif;
+                "
+              >
+                How we determine the confidence of your doctor
+              </h2>
+              <p
+                style="
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                    'Helvetica Neue', sans-serif;
+                "
+              >
+                We use Google's industry-leading AI engine to determine the
+                confidence of your doctor using just the tone and language of
+                his text. The more objective he appears, the more confident he
+                appears to be.
+              </p>
 
-              <p style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Do note that this metric is not failproof, and you shouldn't judge your doctor based on this. We're constantly working to improve this feature but we highly recommend not using it for practical purposes or to test your doctor. Take their advice regardless of what you see here.</p>
+              <p
+                style="
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                    'Helvetica Neue', sans-serif;
+                "
+              >
+                Do note that this metric is not failproof, and you shouldn't
+                judge your doctor based on this. We're constantly working to
+                improve this feature but we highly recommend not using it for
+                practical purposes or to test your doctor. Take their advice
+                regardless of what you see here.
+              </p>
               <button name="close">Close</button>
             </div>
           </div>
@@ -248,7 +278,8 @@
         }
       }
     </script>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script><script src="{{ url_for('static', filename='button.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="{{ url_for('static', filename='button.js') }}"></script>
   </body>
 </html>
