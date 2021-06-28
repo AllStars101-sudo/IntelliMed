@@ -30,3 +30,14 @@ We learnt to work with Google Cloud services for the first time. Flask was also 
 
 <h1>What's next for IntelliMed</h1>
 IntelliMed has a plethora of new potential ideas for implementation. First, would-be full-blown accessibility features for speech, braille, and sound. We would achieve this by using Microsoft or Google's fantastic cloud accessibility features (that we already have buried in the code but are not using yet :) ). Second, would be to get multilingual support for multiple languages. And, last but not the least, integration with health apps on smartphones for deeper connectivity and an appointment system. This is what we envision IntelliMed's near future to be like.
+
+
+<h1>Screenshots</h1>
+![Screenshot (150)](https://user-images.githubusercontent.com/53670363/123564932-c955da80-d7ed-11eb-9f21-92824992430d.png)
+![Screenshot (151)](https://user-images.githubusercontent.com/53670363/123564943-d2df4280-d7ed-11eb-90d0-f8d9171fefa4.png)
+![Screenshot (152)](https://user-images.githubusercontent.com/53670363/123564944-d4106f80-d7ed-11eb-89a0-10955fe1f7fe.png)
+![Screenshot (153)](https://user-images.githubusercontent.com/53670363/123564948-d5419c80-d7ed-11eb-88b8-ee79b56512ce.png)
+![Screenshot (154)](https://user-images.githubusercontent.com/53670363/123564955-dc68aa80-d7ed-11eb-9d49-b1bd591223a5.png)
+![Screenshot (155)](https://user-images.githubusercontent.com/53670363/123564957-de326e00-d7ed-11eb-87d2-2b92b4591fac.png)
+![Screenshot (156)](https://user-images.githubusercontent.com/53670363/123564959-dffc3180-d7ed-11eb-981e-78998fbeb60b.png)
+![Screenshot (157)](https://user-images.githubusercontent.com/53670363/123564964-e12d5e80-d7ed-11eb-8c1c-9f6f9ee5ce9b.png)
