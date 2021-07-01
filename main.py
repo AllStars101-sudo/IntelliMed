@@ -444,123 +444,117 @@ VANTA.NET({
 @cache.cached(timeout=3600)
 @login_required
 def download_file(name):
-  if name.split('.')[1]=="pdf":
-    output_string = StringIO()
-    with open('./uploads/'+name, 'rb') as in_file:
-        parser = PDFParser(in_file)
-        doc = PDFDocument(parser)
-        rsrcmgr = PDFResourceManager()
-        device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
-        interpreter = PDFPageInterpreter(rsrcmgr, device)
-        for page in PDFPage.create_pages(doc):
-            interpreter.process_page(page)
+    if name.split('.')[1]=="pdf":
+        output_string = StringIO()
+        with open('./uploads/'+name, 'rb') as in_file:
+            parser = PDFParser(in_file)
+            doc = PDFDocument(parser)
+            rsrcmgr = PDFResourceManager()
+            device = TextConverter(rsrcmgr, output_string, laparams=LAParams())
+            interpreter = PDFPageInterpreter(rsrcmgr, device)
+            for page in PDFPage.create_pages(doc):
+                interpreter.process_page(page)
 
-    body = str(output_string.getvalue())
-    model = Summarizer()
-    result = model(body, min_length=60)
-    full = ''.join(result)
-    res = re.sub(' +', ' ', full)
-    spacekiller = str(res)
-    summary = spacekiller.replace('\n', ' ').replace('\r', '')
-    doc=summary
+        body = str(output_string.getvalue())
+        model = Summarizer()
+        result = model(body, min_length=60)
+        full = ''.join(result)
+        res = re.sub(' +', ' ', full)
+        spacekiller = str(res)
+        summary = spacekiller.replace('\n', ' ').replace('\r', '')
+        doc=summary
 
-  elif name.split('.')[1]=="docx":
-    document = Document('./uploads/'+name)
-    for para in document.paragraphs:
-        body= para.text
+    elif name.split('.')[1]=="docx":
+      document = Document('./uploads/'+name)
+      for para in document.paragraphs:
+          body= para.text
 
-    model = Summarizer()
-    result = model(body, min_length=60)
-    summary = ''.join(result)
-    doc=summary
+      model = Summarizer()
+      result = model(body, min_length=60)
+      summary = ''.join(result)
+      doc=summary
 
-  elif name.split('.')[1]=="txt":
-    body=open("./uploads/"+name,'r')
+    elif name.split('.')[1]=="txt":
+      body=open("./uploads/"+name,'r')
 
-    model = Summarizer()
-    result = model(body, min_length=60)
-    summary = ''.join(result)
-    doc=summary
+      model = Summarizer()
+      result = model(body, min_length=60)
+      summary = ''.join(result)
+      doc=summary
 
-  elif name.split('.')[1]=="jpg" or name.split('.')[1]=="png" or name.split('.')[1]=="jpeg":
-    """Detects text in the file."""
+    elif name.split('.')[1] in ["jpg", "png", "jpeg"]:
+        """Detects text in the file."""
 
-    client = vision.ImageAnnotatorClient()
+        client = vision.ImageAnnotatorClient()
 
-    with io.open("./uploads/"+name, 'rb') as image_file:
-        content = image_file.read()
+        with io.open("./uploads/"+name, 'rb') as image_file:
+            content = image_file.read()
 
-    image = vision.Image(content=content)
+        image = vision.Image(content=content)
 
-    response = client.text_detection(image=image)
-    texts = response.text_annotations
+        response = client.text_detection(image=image)
+        texts = response.text_annotations
 
-    textdes=""
-    for text in texts:
-        textdes+=text.description
+        textdes = "".join(text.description for text in texts)
+        a_string = textdes
+        split_string = a_string.split("Close", 1)
 
-    a_string = textdes
-    split_string = a_string.split("Close", 1)
+        body = split_string[0]
 
-    body = split_string[0]
+        if response.error.message:
+            raise Exception(
+                '{}\nFor more info on error messages, check: '
+                'https://cloud.google.com/apis/design/errors'.format(
+                    response.error.message))
 
-    if response.error.message:
-        raise Exception(
-            '{}\nFor more info on error messages, check: '
-            'https://cloud.google.com/apis/design/errors'.format(
-                response.error.message))
+        model = Summarizer()
+        result = model(body, min_length=60)
+        summary = ''.join(result)
+        doc=summary
 
-    model = Summarizer()
-    result = model(body, min_length=60)
-    summary = ''.join(result)
-    doc=summary
+    elif name.split('.')[1] in ["wav", "mp3", "flac"]:
 
-  elif name.split('.')[1]=="wav" or name.split('.')[1]=="mp3" or name.split('.')[1]=="flac":
+        client = speech.SpeechClient()
 
-    client = speech.SpeechClient()
+        with io.open("./uploads/"+name, "rb") as audio_file:
+            content = audio_file.read()
 
-    with io.open("./uploads/"+name, "rb") as audio_file:
-        content = audio_file.read()
+        audio = speech.RecognitionAudio(content=content)
+        config = speech.RecognitionConfig(
+            encoding=speech.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED,
+            sample_rate_hertz=16000,
+            language_code="en-US",
+        )
 
-    audio = speech.RecognitionAudio(content=content)
-    config = speech.RecognitionConfig(
-        encoding=speech.RecognitionConfig.AudioEncoding.ENCODING_UNSPECIFIED,
-        sample_rate_hertz=16000,
-        language_code="en-US",
-    )
+        response = client.recognize(config=config, audio=audio)
+        body=""
+        # Each result is for a consecutive portion of the audio. Iterate through
+        # them to get the transcripts for the entire audio file.
+        for result in response.results:
+            # The first alternative is the most likely one for this portion.
+            summary=str(result.alternatives[0].transcript)
 
-    response = client.recognize(config=config, audio=audio)
-    body=""
-    # Each result is for a consecutive portion of the audio. Iterate through
-    # them to get the transcripts for the entire audio file.
-    for result in response.results:
-        # The first alternative is the most likely one for this portion.
-        summary=str(result.alternatives[0].transcript)
-    
 
-    doc= summary
+        doc= summary
 
-  kw_model = KeyBERT('distilbert-base-nli-mean-tokens')
-  processedkeywords = kw_model.extract_keywords(doc)
+    kw_model = KeyBERT('distilbert-base-nli-mean-tokens')
+    processedkeywords = kw_model.extract_keywords(doc)
 
-  keywords=[]
-  for keyword in processedkeywords:
-      keywords.append(keyword[0])
+    keywords = [keyword[0] for keyword in processedkeywords]
+    meaning=[]
 
-  meaning=[]
+    for i in keywords:
+        syns = wordnet.synsets(i)
+        meaning.append(syns[0].definition())
 
-  for i in keywords:
-      syns = wordnet.synsets(i)
-      meaning.append(syns[0].definition())
-  
-  result = {}
-  for key in keywords:
-      for value in meaning:
-          result[key] = value
-          meaning.remove(value)
-          break
+    result = {}
+    for key in keywords:
+        for value in meaning:
+            result[key] = value
+            meaning.remove(value)
+            break
 
-  return render_template('summary.html',summary=str(summary),condition=sample_analyze_sentiment(summary),confidence = sample_classify_text(summary),keywords=result)
+    return render_template('summary.html',summary=str(summary),condition=sample_analyze_sentiment(summary),confidence = sample_classify_text(summary),keywords=result)
 
 
 #sentiment analysis (how severe the condition is)
@@ -594,18 +588,16 @@ def sample_analyze_sentiment(text_content):
 
     listok = list(str(response.document_sentiment.score))
     if len(listok)==3:
-      responsestring = listok[0]+listok[1]+listok[2]
-    elif len(listok)==4:
-      responsestring = listok[0]+listok[1]+listok[2]+listok[3]
+        responsestring = listok[0]+listok[1]+listok[2]
     else:
-      responsestring = listok[0]+listok[1]+listok[2]+listok[3]
+        responsestring = listok[0]+listok[1]+listok[2]+listok[3]
     responsefloat = float(responsestring)
-        
+
     # Get sentiment for all sentences in the document
     # Get the language of the text, which will be the same as
     # the language specified in the request or, if not specified,
     # the automatically-detected language.
-    if responsefloat in [-0.1,-0.2,-0.3,-0.4]:
+    if responsefloat in {-0.1, -0.2, -0.3, -0.4}:
         return "Your condition is slightly serious. Take good care of yourself and obey your doctor's instructions. Visit the clinic as many times as possible."
     elif responsefloat==0.1 or response.document_sentiment.score==0.0:
         return "You seem to be just fine to do most tasks. However, they may be a risk of illness. Take good rest and visit your doctor regularly."
@@ -643,10 +635,14 @@ def sample_classify_text(text_content):
         # See the predefined taxonomy of categories:
         # https://cloud.google.com/natural-language/docs/categories
         if math.ceil(category.confidence*100)<=50:
-          confidence = "We've determined that the document is not a health document. None of the parameters here will be accurate. However, if it was a medical report, we're extremely sorry. You may raise an issue here at our GitHub Page: https://github.com/AllStars101-sudo/IntelliMed"
+            return "We've determined that the document is not a health document. None of the parameters here will be accurate. However, if it was a medical report, we're extremely sorry. You may raise an issue here at our GitHub Page: https://github.com/AllStars101-sudo/IntelliMed"
+
         else:
-          confidence = "Your doctor is "+str(math.ceil(category.confidence*100))+" per-cent confident with his diagnosis."
-        return confidence
+            return (
+                "Your doctor is "
+                + str(math.ceil(category.confidence * 100))
+                + " per-cent confident with his diagnosis."
+            )
 
 
 def keywordsfunc(text_content):
@@ -655,16 +651,13 @@ def keywordsfunc(text_content):
     kw_model = KeyBERT('distilbert-base-nli-mean-tokens')
     processedkeywords = kw_model.extract_keywords(doc)
 
-    keywords=[]
-    for keyword in processedkeywords:
-        keywords.append(keyword[0])
-
+    keywords = [keyword[0] for keyword in processedkeywords]
     meaning=[]
 
     for i in keywords:
         syns = wordnet.synsets(i)
         meaning.append(syns[0].definition())
-    
+
     result = {}
     for key in keywords:
         for value in meaning:
